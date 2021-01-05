@@ -1,0 +1,46 @@
+[*]
+[*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
+[*] Tue Jan  5 12:36:53 2021
+[*]
+[dumpfile] "/home/ruslan/intelFPGA_lite/fpga_hwag_0-03/test.vcd"
+[dumpfile_mtime] "Tue Jan  5 12:34:40 2021"
+[dumpfile_size] 198876489
+[savefile] "/home/ruslan/intelFPGA_lite/fpga_hwag_0-03/test.gtkw"
+[timestart] 339020
+[size] 1716 665
+[pos] -1 -1
+*-13.404251 376195 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] test.
+[treeopen] test.hwag0.
+[sst_width] 220
+[signals_width] 245
+[sst_expanded] 1
+[sst_vpaned_height] 235
+@28
+test.hwag0.clk
+test.hwag0.camf
+test.hwag0.capf
+test.hwag0.main_edge
+@8024
+test.hwag0.pcnt_data[23:0]
+@24
+test.hwag0.pcnt1_data[23:0]
+test.hwag0.pcnt2_data[23:0]
+test.hwag0.pcnt3_data[23:0]
+test.hwag0.scnt_data_load[17:0]
+@28
+test.hwag0.pcnt1_less_half_pcnt_b
+test.hwag0.pcnt1_less_half_pcnt2_b
+test.hwag0.pcnt3_less_half_pcnt2_b
+test.hwag0.hwag_start
+@24
+test.hwag0.tcnt_data[5:0]
+@28
+test.hwag0.gap_point
+test.hwag0.tckc_load_gap
+@8024
+test.hwag0.scnt_out[17:0]
+@25
+test.hwag0.tckc_out[7:0]
+[pattern_trace] 1
+[pattern_trace] 0
