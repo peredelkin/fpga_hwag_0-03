@@ -14,7 +14,8 @@ module hwag
     input wire cap,
     input wire cam,
     output wire hwag_start,
-    output wire gap_point
+    output wire gap_point,
+    output wire test_coil
 );
 
 wire rstb;
@@ -23,9 +24,9 @@ wire camb;
 
 d_flip_flop #(3) input_buffer (.clk(clk),.ena(1'b1),.d({rst,cap,cam}),.arst(1'b0),.q({rstb,capb,camb}));
     
-input_filter #(12) cap_filter (.clk(clk),.rst(rstb),.data(12'd126),.in(capb),.out(capf));
+input_filter #(12) cap_filter (.clk(clk),.rst(rstb),.data(12'd1024),.in(capb),.out(capf));
 
-input_filter #(12) cam_filter (.clk(clk),.rst(rstb),.data(12'd126),.in(camb),.out(camf));
+input_filter #(12) cam_filter (.clk(clk),.rst(rstb),.data(12'd1024),.in(camb),.out(camf));
 
 cap_edge cap_edge_gen (.clk(clk),.ena(1'b1),.cap(capf),.srst(1'b0),.arst(rstb),.rise(cap_rise),.fall(cap_fall));
     
@@ -57,6 +58,8 @@ comparator #(24) pcnt3_less_half_pcnt2_comp (.a(pcnt3_data),.b({1'b0,pcnt2_data[
 
 d_flip_flop #(3) comparator_buffer (.clk(clk),.ena(1'b1),   .d({pcnt1_less_half_pcnt,  pcnt1_less_half_pcnt2,  pcnt3_less_half_pcnt2  }),.srst(1'b0),.arst(rstb),
                                                             .q({pcnt1_less_half_pcnt_b,pcnt1_less_half_pcnt2_b,pcnt3_less_half_pcnt2_b}));
+                                                            
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 wire gap_found = pcnt1_less_half_pcnt2_b & pcnt3_less_half_pcnt2_b;
 
@@ -106,6 +109,8 @@ wire acnt_ena = hwag_start & ~acnt_ovf & tckc_count;
 wire acnt_sload = (hwag_start & acnt_ovf & tckc_count) | main_edge;
 
 counter #(12) acnt (.clk(clk),.ena(acnt_ena),.sel(1'b1),.sload(acnt_sload),.d_load(acnt_data_load),.srst(1'b0),.arst(rstb),.q(acnt_out),.carry_out(acnt_ovf));
+
+set_reset_comparator #(12) test_ignition (.set_data(12'd2122),.reset_data(12'd1920),.data_compare(acnt_out),.clk(clk),.ena(1'b1),.input_rst(~hwag_start),.output_rst(~hwag_start),.out(test_coil));
     
 endmodule
 
