@@ -35,7 +35,7 @@ d_flip_flop #(1) filter_ff
 
 endmodule
 
-module cap_edge(
+module input_edge(
 input wire clk,
 input wire ena,
 input wire cap,

@@ -12,8 +12,8 @@ output reg aeb,
 output wire aleb,
 output reg alb);
 
-assign ageb = agb | aeb;
-assign aleb = alb | aeb;
+assign aleb = ~agb;
+assign ageb = ~alb;
 
 always @(*) begin
 	if(a > b) agb <= 1'b1;
@@ -28,57 +28,23 @@ end
 
 endmodule
 
-module set_reset_comparator #(parameter WIDTH=1) (
-input wire [WIDTH-1:0] set_data,
-input wire [WIDTH-1:0] reset_data,
-input wire [WIDTH-1:0] data_compare,
+module synchronous_comparator #(parameter WIDTH=1) (
 input wire clk,
 input wire ena,
-input wire input_rst,
-input wire output_rst,
-output wire out
-);
+input wire srst,
+input wire arst,
+input wire [WIDTH-1:0] a,
+input wire [WIDTH-1:0] b,
+output wire agb,
+output wire ageb,
+output wire aeb,
+output wire aleb,
+output wire alb);
 
-wire [23:0] set_buffer_out;
-wire [23:0] reset_buffer_out;
+comparator #(WIDTH) comp (.a(a),.b(b),.agb(agb_d),.ageb(ageb_d),.aeb(aeb_d),.aleb(aleb_d),.alb(alb_d));
 
-d_flip_flop #(WIDTH) set_buffer
-(   .clk(clk),
-    .ena(ena),
-    .sload(1'b0),
-    .d(set_data),
-    .srst(1'b0),
-    .arst(input_rst),
-    .q(set_buffer_out));
-    
-d_flip_flop #(WIDTH) reset_buffer
-(   .clk(clk),
-    .ena(ena),
-    .sload(1'b0),
-    .d(reset_data),
-    .srst(1'b0),
-    .arst(input_rst),
-    .q(reset_buffer_out));
+d_flip_flop #(5) buffer (.clk(clk),.ena(ena),.d({agb_d,ageb_d,aeb_d,aleb_d,alb_d}),.srst(srst),.arst(arst),.q({agb,ageb,aeb,aleb,alb}));
 
-comparator #(WIDTH) set_comp
-(   .a(data_compare),
-    .b(set_buffer_out),
-    .aeb(set_comp_out));
-
-comparator #(WIDTH) reset_comp
-(   .a(data_compare),
-    .b(reset_buffer_out),
-    .aeb(reset_comp_out));
-    
-d_flip_flop #(1) d_ff_out 
-(   .clk(clk),
-    .ena(set_comp_out & ~out),
-    .sload(1'b0),
-    .d(1'b1),
-    .srst(reset_comp_out & out),
-    .arst(output_rst),
-    .q(out));
-    
 endmodule
 
 `endif

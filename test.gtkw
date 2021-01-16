@@ -1,46 +1,66 @@
 [*]
 [*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Tue Jan  5 16:06:34 2021
+[*] Sat Jan 16 14:45:41 2021
 [*]
 [dumpfile] "/home/ruslan/intelFPGA_lite/fpga_hwag_0-03/test.vcd"
-[dumpfile_mtime] "Tue Jan  5 16:05:02 2021"
-[dumpfile_size] 202723773
+[dumpfile_mtime] "Sat Jan 16 14:44:32 2021"
+[dumpfile_size] 149259290
 [savefile] "/home/ruslan/intelFPGA_lite/fpga_hwag_0-03/test.gtkw"
-[timestart] 363319
-[size] 1716 665
+[timestart] 76600
+[size] 1949 1363
 [pos] -1 -1
-*-8.404251 376199 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-14.404251 134900 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] test.
 [treeopen] test.hwag0.
-[sst_width] 220
+[sst_width] 239
 [signals_width] 245
 [sst_expanded] 1
-[sst_vpaned_height] 235
+[sst_vpaned_height] 577
 @28
 test.hwag0.clk
 test.hwag0.camf
 test.hwag0.capf
-test.hwag0.main_edge
+@200
+-
+@28
+test.hwag0.cap_edge
+test.hwag0.pcnt_start
 @8024
 test.hwag0.pcnt_data[23:0]
+@200
+-
 @24
 test.hwag0.pcnt1_data[23:0]
 test.hwag0.pcnt2_data[23:0]
 test.hwag0.pcnt3_data[23:0]
-test.hwag0.scnt_data_load[17:0]
+@200
+-
 @28
-test.hwag0.pcnt1_less_half_pcnt_b
-test.hwag0.pcnt1_less_half_pcnt2_b
-test.hwag0.pcnt3_less_half_pcnt2_b
+test.hwag0.pcnt1_less_half_pcnt
+test.hwag0.pcnt1_less_half_pcnt2
+test.hwag0.pcnt3_less_half_pcnt2
+@200
+-
+@28
+test.hwag0.pcnt_max_less_pcnt1
+test.hwag0.pcnt_max_less_pcnt2
+test.hwag0.pcnt3_less_pcnt_max
+@200
+-
+@28
+test.hwag0.pcnt_min_less_pcnt1
+test.hwag0.pcnt_min_less_pcnt2
+test.hwag0.pcnt_min_less_pcnt3
+@200
+-
+@28
+test.hwag0.pcnt_nom
+test.hwag0.pcnt_not_nom
+@200
+-
+@28
+test.hwag0.gap_found
+@29
 test.hwag0.hwag_start
-test.hwag0.gap_point
-@24
-test.hwag0.tcnt_data[5:0]
-@8024
-test.hwag0.scnt_out[17:0]
-@24
-test.hwag0.tckc_out[7:0]
-@25
-test.hwag0.acnt_out[11:0]
 [pattern_trace] 1
 [pattern_trace] 0
