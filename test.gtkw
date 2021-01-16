@@ -1,19 +1,19 @@
 [*]
 [*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Sat Jan 16 14:45:41 2021
+[*] Sat Jan 16 18:13:27 2021
 [*]
 [dumpfile] "/home/ruslan/intelFPGA_lite/fpga_hwag_0-03/test.vcd"
-[dumpfile_mtime] "Sat Jan 16 14:44:32 2021"
-[dumpfile_size] 149259290
+[dumpfile_mtime] "Sat Jan 16 18:11:19 2021"
+[dumpfile_size] 149294206
 [savefile] "/home/ruslan/intelFPGA_lite/fpga_hwag_0-03/test.gtkw"
-[timestart] 76600
+[timestart] 352620
 [size] 1949 1363
 [pos] -1 -1
-*-14.404251 134900 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-13.152309 387900 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] test.
 [treeopen] test.hwag0.
 [sst_width] 239
-[signals_width] 245
+[signals_width] 283
 [sst_expanded] 1
 [sst_vpaned_height] 577
 @28
@@ -60,7 +60,20 @@ test.hwag0.pcnt_not_nom
 -
 @28
 test.hwag0.gap_found
-@29
 test.hwag0.hwag_start
+@200
+-
+@28
+test.hwag0.cap_edge
+test.hwag0.tooth_counter_ena
+test.hwag0.tooth_counter_sload
+test.hwag0.gap_point
+@24
+test.hwag0.tooth_counter_d_load[7:0]
+test.hwag0.tooth_counter_data[7:0]
+@28
+test.hwag0.gap_lost
+@29
+test.hwag0.gap_drn_normal_tooth
 [pattern_trace] 1
 [pattern_trace] 0
