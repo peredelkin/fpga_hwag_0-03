@@ -91,7 +91,9 @@ d_flip_flop #(1) hwag_start_trigger (.clk(clk),.ena(hwag_start_ena),.d(1'b1),.sr
 
 
 wire tooth_counter_ena = cap_edge & ~tooth_counter_ovf;
+
 wire tooth_counter_sload = (cap_edge & tooth_counter_ovf) | ~hwag_start;
+
 wire [7:0] tooth_counter_d_load;
 
 mult2to1 #(8) tooth_counter_d_load_sel (.sel(~hwag_start),.a(8'd57),.b(8'd55),.out(tooth_counter_d_load));
@@ -104,7 +106,20 @@ d_flip_flop #(1) gap_point_trigger (.clk(clk),.ena(cap_edge),.d(tooth_counter_ov
 d_flip_flop #(1) gap_lost_trigger (.clk(clk),.ena(cap_edge),.d(gap_point & ~gap_run),.srst(~hwag_start),.arst(rstb),.q(gap_lost));
 
 d_flip_flop #(1) gap_drn_normal_tooth_trigger (.clk(clk),.ena(cap_edge),.d(~gap_point & gap_run),.srst(~hwag_start),.arst(rstb),.q(gap_drn_normal_tooth));
- 
+
+
+wire main_angular_counter_ena;
+
+wire main_angular_counter_sload = cap_edge;
+
+wire [15:0] main_angular_counter_d_load = {tooth_counter_data,6'd0};
+
+wire main_angular_counter_srst;
+
+wire [15:0] main_angular_counter_data;
+
+counter #(16) main_angular_counter (.clk(clk),.ena(main_angular_counter_ena),.sel(1'b1),.sload(main_angular_counter_sload),.d_load(main_angular_counter_d_load),.srst(main_angular_counter_srst),.arst(rstb),.q(main_angular_counter_data),.carry_out(main_angular_counter_ovf));
+
 endmodule
 
 `endif
