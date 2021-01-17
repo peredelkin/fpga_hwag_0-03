@@ -69,14 +69,19 @@ synchronous_comparator #(24) pcnt_max_less_pcnt1_comp (.clk(clk),.ena(pcnt_start
 synchronous_comparator #(24) pcnt_max_less_pcnt2_comp (.clk(clk),.ena(pcnt_start),.srst(~pcnt_start),.arst(rstb),.a(pcnt_max),.b(pcnt2_data),.alb(pcnt_max_less_pcnt2));
 synchronous_comparator #(24) pcnt3_less_pcnt_max_comp (.clk(clk),.ena(pcnt_start),.srst(~pcnt_start),.arst(rstb),.a(pcnt3_data),.b(pcnt_max),.alb(pcnt3_less_pcnt_max));
 
-wire pcnt_greater_min = pcnt_min_less_pcnt1 &   pcnt_min_less_pcnt2 &  pcnt_min_less_pcnt3;
-wire pcnt_less_min =   ~pcnt_min_less_pcnt1 |  ~pcnt_min_less_pcnt2 | ~pcnt_min_less_pcnt3;
+//wire pcnt_greater_min = pcnt_min_less_pcnt1 &   pcnt_min_less_pcnt2 &  pcnt_min_less_pcnt3;
+//wire pcnt_less_min =   ~pcnt_min_less_pcnt1 |  ~pcnt_min_less_pcnt2 | ~pcnt_min_less_pcnt3;
+d_flip_flop #(1) pcnt_greater_min_trigger (.clk(clk),.ena(1'b1),.d(pcnt_min_less_pcnt1 &   pcnt_min_less_pcnt2 &  pcnt_min_less_pcnt3),.arst(rstb),.q(pcnt_greater_min));
+d_flip_flop #(1) pcnt_less_min_trigger (.clk(clk),.ena(1'b1),.d(~pcnt_min_less_pcnt1 |  ~pcnt_min_less_pcnt2 | ~pcnt_min_less_pcnt3),.arst(rstb),.q(pcnt_less_min));
 
-wire pcnt_nom = pcnt_greater_min & pcnt3_less_pcnt_max;
-wire pcnt_not_nom = pcnt_less_min | (pcnt_max_less_pcnt1 & pcnt_max_less_pcnt2);
+//wire pcnt_nom = pcnt_greater_min & pcnt3_less_pcnt_max;
+//wire pcnt_not_nom = pcnt_less_min | (pcnt_max_less_pcnt1 & pcnt_max_less_pcnt2);
+d_flip_flop #(1) pcnt_nom_trigger (.clk(clk),.ena(1'b1),.d(pcnt_greater_min & pcnt3_less_pcnt_max),.arst(rstb),.q(pcnt_nom));
+d_flip_flop #(1) pcnt_not_nom_trigger (.clk(clk),.ena(1'b1),.d(pcnt_less_min | (pcnt_max_less_pcnt1 & pcnt_max_less_pcnt2)),.arst(rstb),.q(pcnt_not_nom));
 
 wire gap_run = pcnt1_less_half_pcnt;
-wire gap_found = pcnt1_less_half_pcnt2 & pcnt3_less_half_pcnt2;
+//wire gap_found = pcnt1_less_half_pcnt2 & pcnt3_less_half_pcnt2;
+d_flip_flop #(1) gap_found_trigger (.clk(clk),.ena(1'b1),.d(pcnt1_less_half_pcnt2 & pcnt3_less_half_pcnt2),.arst(rstb),.q(gap_found));
 
 //========================================================================
 

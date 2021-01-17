@@ -1,21 +1,21 @@
 [*]
 [*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Sun Jan 17 14:30:49 2021
+[*] Sun Jan 17 21:29:57 2021
 [*]
 [dumpfile] "/home/ruslan/intelFPGA_lite/fpga_hwag_0-03/test.vcd"
-[dumpfile_mtime] "Sun Jan 17 14:29:40 2021"
-[dumpfile_size] 210238997
+[dumpfile_mtime] "Sun Jan 17 21:27:24 2021"
+[dumpfile_size] 100222064
 [savefile] "/home/ruslan/intelFPGA_lite/fpga_hwag_0-03/test.gtkw"
 [timestart] 0
-[size] 3440 1367
+[size] 1366 739
 [pos] -1 -1
-*-16.137674 364363 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-16.649132 134334 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] test.
 [treeopen] test.hwag0.
-[sst_width] 310
+[sst_width] 37
 [signals_width] 302
-[sst_expanded] 1
-[sst_vpaned_height] 577
+[sst_expanded] 0
+[sst_vpaned_height] 216
 @28
 test.hwag0.clk
 test.hwag0.camf
@@ -62,6 +62,10 @@ test.hwag0.pcnt_not_nom
 -
 @28
 test.hwag0.gap_found
+@29
+test.hwag0.hwag_start_ena
+@28
+test.hwag0.hwag_start_srst
 test.hwag0.hwag_start
 @200
 -
