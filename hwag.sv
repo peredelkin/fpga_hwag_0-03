@@ -165,6 +165,12 @@ wire [15:0] main_angle_counter_data;
 
 counter #(16) main_angle_counter (.clk(clk),.ena(main_angle_counter_ena),.sel(1'b1),.sload(main_angle_counter_sload),.d_load(main_angle_counter_load_data),.srst(main_angle_counter_srst),.arst(rstb),.q(main_angle_counter_data),.carry_out(main_angle_counter_ovf));
 
+synchronous_comparator #(16) test_coil_set_comp (.clk(clk),.ena(1'b1),.srst(1'b0),.arst(rstb),.a(16'd50),.b(main_angle_counter_data),.ageb(test_coil_set));
+
+synchronous_comparator #(16) test_coil_reset_comp (.clk(clk),.ena(1'b1),.srst(1'b0),.arst(rstb),.a(16'd1),.b(main_angle_counter_data),.ageb(test_coil_reset));
+
+d_flip_flop #(1) test_coil_trigger (.clk(clk),.ena(1'b1),.d(test_coil_set & ~test_coil_reset),.srst(~hwag_start),.arst(rstb),.q(test_coil));
+
 endmodule
 
 `endif
