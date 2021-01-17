@@ -97,6 +97,7 @@ wire tooth_counter_sload = (cap_edge & tooth_counter_ovf) | ~hwag_start;
 wire [7:0] tooth_counter_d_load;
 
 mult2to1 #(8) tooth_counter_d_load_sel (.sel(~hwag_start),.a(8'd57),.b(8'd55),.out(tooth_counter_d_load));
+
 wire [7:0] tooth_counter_data;
 
 counter #(8) tooth_counter (.clk(clk),.ena(tooth_counter_ena),.sel(1'b1),.sload(tooth_counter_sload),.d_load(tooth_counter_d_load),.srst(1'b0),.arst(rstb),.q(tooth_counter_data),.carry_out(tooth_counter_ovf));
@@ -108,17 +109,49 @@ d_flip_flop #(1) gap_lost_trigger (.clk(clk),.ena(cap_edge),.d(gap_point & ~gap_
 d_flip_flop #(1) gap_drn_normal_tooth_trigger (.clk(clk),.ena(cap_edge),.d(~gap_point & gap_run),.srst(~hwag_start),.arst(rstb),.q(gap_drn_normal_tooth));
 
 
-wire main_angular_counter_ena;
+wire step_counter_ena = ~tick_counter_ovf & ~step_counter_ovf;
 
-wire main_angular_counter_sload = cap_edge;
+wire step_counter_sload = cap_edge | (~tick_counter_ovf & step_counter_ovf);
 
-wire [15:0] main_angular_counter_d_load = {tooth_counter_data,6'd0};
+wire [17:0] step_counter_d_load = pcnt1_data[23:6];
 
-wire main_angular_counter_srst;
+wire step_counter_srst = ~hwag_start;
 
-wire [15:0] main_angular_counter_data;
+wire [17:0] step_counter_data;
 
-counter #(16) main_angular_counter (.clk(clk),.ena(main_angular_counter_ena),.sel(1'b1),.sload(main_angular_counter_sload),.d_load(main_angular_counter_d_load),.srst(main_angular_counter_srst),.arst(rstb),.q(main_angular_counter_data),.carry_out(main_angular_counter_ovf));
+counter #(18) step_counter (.clk(clk),.ena(step_counter_ena),.sel(1'b1),.sload(step_counter_sload),.d_load(step_counter_d_load),.srst(step_counter_srst),.arst(rstb),.q(step_counter_data),.carry_out(step_counter_ovf));
+
+
+wire tick_counter_ena = ~tick_counter_ovf & step_counter_ovf;
+
+wire tick_counter_sload = cap_edge;
+
+wire [15:0] tick_counter_d_load;
+
+mult2to1 #(16) tick_counter_d_load_sel (.sel(tooth_counter_ovf),.a(16'd64),.b(16'd192),.out(tick_counter_d_load));
+
+wire tick_counter_srst = ~hwag_start;
+
+wire [15:0] tick_counter_data;
+
+counter #(16) tick_counter (.clk(clk),.ena(tick_counter_ena),.sel(1'b1),.sload(tick_counter_sload),.d_load(tick_counter_d_load),.srst(tick_counter_srst),.arst(rstb),.q(tick_counter_data),.carry_out(tick_counter_ovf));
+
+
+wire main_angle_counter_ena = tick_counter_ena & ~main_angle_counter_ovf;
+
+wire main_angle_counter_sload = cap_edge | (tick_counter_ena & main_angle_counter_ovf);
+
+wire [15:0] main_angle_counter_d_load_from_tooth_counter = {tooth_counter_data,6'd0};
+
+wire [15:0] main_angle_counter_d_load;
+
+mult2to1 #(16) main_angle_counter_d_load_sel (.sel(main_angle_counter_ovf),.a(main_angle_counter_d_load_from_tooth_counter),.b(16'd3839),.out(main_angle_counter_d_load));
+
+wire main_angle_counter_srst;
+
+wire [15:0] main_angle_counter_data;
+
+counter #(16) main_angle_counter (.clk(clk),.ena(main_angle_counter_ena),.sel(1'b1),.sload(main_angle_counter_sload),.d_load(main_angle_counter_d_load),.srst(main_angle_counter_srst),.arst(rstb),.q(main_angle_counter_data),.carry_out(main_angle_counter_ovf));
 
 endmodule
 
