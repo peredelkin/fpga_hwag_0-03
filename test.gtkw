@@ -1,21 +1,21 @@
 [*]
 [*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Mon Jan 18 14:05:06 2021
+[*] Fri Jan 22 19:11:22 2021
 [*]
 [dumpfile] "/home/ruslan/intelFPGA_lite/fpga_hwag_0-03/test.vcd"
-[dumpfile_mtime] "Mon Jan 18 12:33:13 2021"
-[dumpfile_size] 100222332
+[dumpfile_mtime] "Fri Jan 22 19:08:23 2021"
+[dumpfile_size] 224512806
 [savefile] "/home/ruslan/intelFPGA_lite/fpga_hwag_0-03/test.gtkw"
 [timestart] 0
 [size] 3440 1367
 [pos] -1 -1
-*-15.205831 134334 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-16.203106 173800 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] test.
 [treeopen] test.hwag0.
-[sst_width] 387
-[signals_width] 353
+[sst_width] 398
+[signals_width] 337
 [sst_expanded] 1
-[sst_vpaned_height] 216
+[sst_vpaned_height] 296
 @28
 test.hwag0.clk
 test.hwag0.camf
@@ -96,11 +96,43 @@ test.hwag0.tick_counter_data[15:0]
 -
 @200
 -
-@24
-test.hwag0.main_angle_counter_load_data[15:0]
+@20000
+-
 @8024
 test.hwag0.main_angle_counter_data[15:0]
 @20000
 -
+@200
+-
+@8024
+test.hwag0.second_angle_counter_data[15:0]
+@20000
+-
+@200
+-
+@28
+test.hwag0.slave_counter_ena
+@200
+-
+-
+@8024
+test.hwag0.slave_angle_counter_0_data[15:0]
+@20000
+-
+@8024
+test.hwag0.slave_angle_counter_1_data[15:0]
+@20000
+-
+@28
+test.hwag0.coil_set_0
+test.hwag0.coil_reset_0
+test.hwag0.coil_0
+@200
+-
+@28
+test.hwag0.coil_set_1
+test.hwag0.coil_reset_1
+@29
+test.hwag0.coil_1
 [pattern_trace] 1
 [pattern_trace] 0
